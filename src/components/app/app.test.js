@@ -1,14 +1,14 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import App from "./app";
+import React from 'react';
+import renderer from 'react-test-renderer';
+
+import films from '../../mocks/films';
+import App from './app';
 
 describe(`Проверка <App>`, () => {
   it(`компонент <App> корректно отрисован`, () => {
-    const moviesList = [{name: `Fantastic Beasts`}, {name: `Bohemian Rhapsody`}, {name: `Macbeth`}];
-
     const tree = renderer
       .create(<App
-        moviesList = {moviesList}
+        movies = {films}
       />)
       .toJSON();
 
