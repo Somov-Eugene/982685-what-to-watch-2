@@ -3,12 +3,13 @@
 exports[`Проверка <SmallMovieCard> компонент <SmallMovieCard> корректно отрисован 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
+  onMouseEnter={[MockFunction]}
 >
   <div
     className="small-movie-card__image"
   >
     <img
-      alt="Fantastic Beasts"
+      alt="Fantastic Beasts: The Crimes of Grindelwald"
       height="175"
       src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
       width="280"
@@ -22,7 +23,7 @@ exports[`Проверка <SmallMovieCard> компонент <SmallMovieCard> �
       href="movie-page.html"
       onClick={[MockFunction]}
     >
-      Fantastic Beasts
+      Fantastic Beasts: The Crimes of Grindelwald
     </a>
   </h3>
 </article>
