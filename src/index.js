@@ -1,16 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/app/app.jsx';
 
-const init = () => {
-  const moviesList = [{name: `Fantastic Beasts`}, {name: `Bohemian Rhapsody`}, {name: `Macbeth`}];
+import App from './components/app/app.jsx';
+import films from './mocks/films';
+
+const init = (movies) => {
 
   ReactDOM.render(
       <App
-        moviesList = {moviesList}
+        movies = {movies}
       />,
       document.querySelector(`#root`)
   );
 };
 
-init();
+init(films);

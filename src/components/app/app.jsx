@@ -1,21 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import MainPage from '../main-page/main-page.jsx';
 
 const App = (props) => {
-  const {moviesList} = props;
+  const {movies} = props;
 
   return <MainPage
-    movies = {moviesList}
+    movies = {movies}
   />;
 };
 
 App.propTypes = {
-  moviesList: PropTypes.arrayOf(
+  movies: PropTypes.arrayOf(
       PropTypes.shape({
-        name: PropTypes.string.isRequired
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        poster: PropTypes.string.isRequired
       })
-  )
+  ).isRequired
 };
 
 export default App;

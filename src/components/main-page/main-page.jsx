@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SmallMovieCard from '../small-movie-card/small-movie-card.jsx';
+
+import MoviesList from '../movies-list/movies-list.jsx';
 
 const MainPage = (props) => {
   const {movies} = props;
@@ -99,11 +100,7 @@ const MainPage = (props) => {
             </li>
           </ul>
 
-          <div className="catalog__movies-list">
-            {
-              movies.map((movie, i) => <SmallMovieCard movie = {movie} key = {i} />)
-            }
-          </div>
+          <MoviesList movies = {movies} />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
@@ -131,7 +128,9 @@ const MainPage = (props) => {
 MainPage.propTypes = {
   movies: PropTypes.arrayOf(
       PropTypes.shape({
-        name: PropTypes.string.isRequired
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        poster: PropTypes.string.isRequired
       })
   )
 };
