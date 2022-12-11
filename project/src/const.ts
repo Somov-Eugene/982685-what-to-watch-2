@@ -5,7 +5,7 @@ export enum AppRoute {
   Film = '/films',
   AddReview = '/review',
   Player = '/player',
-  Id = '/:id'
+  Id = '/:id',
 }
 
 export enum AuthorizationStatus {
@@ -13,3 +13,37 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
+
+export const RATING_MAX = 10;
+
+export const FilmScores: {
+  from: number;
+  to: number;
+  score: string;
+}[] = [
+  {
+    from: 0,
+    to: 2,
+    score: 'Bad',
+  },
+  {
+    from: 3,
+    to: 4,
+    score: 'Normal',
+  },
+  {
+    from: 5,
+    to: 7,
+    score: 'Good',
+  },
+  {
+    from: 8,
+    to: 9,
+    score: 'Very good',
+  },
+  {
+    from: 10,
+    to: 10,
+    score: 'Awesome',
+  },
+];
