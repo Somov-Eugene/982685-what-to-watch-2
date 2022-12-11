@@ -1,4 +1,28 @@
-import { FilmsType } from './../types/films';
+import { FilmsType, FilmType } from './../types/films';
+
+export const mockPromo: FilmType = {
+  id: 0,
+  name: 'The Grand Budapest Hotel',
+  posterImage: 'img/the-grand-budapest-hotel-poster.jpg',
+  previewImage: 'img/the-grand-budapest-hotel-poster.jpg',
+  backgroundImage: 'img/the-grand-budapest-hotel-poster.jpg',
+  backgroundColor: '#AD9F8B',
+  description: 'A writer encounters the owner of an aging high-class hotel, who tells him of his early years serving as a lobby boy in the hotel\'s glorious years under an exceptional concierge.',
+  rating: 8.1,
+  scoresCount: 808357,
+  director: 'Wes Anderson',
+  starring: [
+    'Ralph Fiennes',
+    'Mathieu Amalric',
+    'Bill Murray',
+  ],
+  runTime: 100,
+  genre: 'Drama',
+  released: 2014,
+  isFavorite: false,
+  videoLink: 'https://11.react.pages.academy/static/film/video/bubbles.mp4',
+  previewVideoLink: 'https://11.react.pages.academy/static/film/video/traffic.mp4'
+};
 
 export const mockFilms: FilmsType = [
   {
