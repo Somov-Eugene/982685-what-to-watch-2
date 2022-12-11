@@ -1,13 +1,13 @@
 import { ChangeEvent, FormEvent, Fragment, useState } from 'react';
-import { redirect } from 'react-router-dom';
-import { AppRoute, RATING_MAX } from '../../const';
+import { NewReviewType } from '../../types/reviews';
+import { RATING_MAX } from '../../const';
 
 type AddReviewFormProps = {
   filmId: number;
 };
 
 function AddReviewForm({ filmId }: AddReviewFormProps): JSX.Element {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<NewReviewType>({
     comment: '',
     rating: 0,
   });
@@ -24,7 +24,7 @@ function AddReviewForm({ filmId }: AddReviewFormProps): JSX.Element {
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    redirect(`${AppRoute.Film}/${filmId}`);
+    // redirect(`${AppRoute.Film}/${filmId}`);
   };
 
   return (
@@ -37,8 +37,9 @@ function AddReviewForm({ filmId }: AddReviewFormProps): JSX.Element {
       >
         <div className="rating">
           <div className="rating__stars">
-            {Array.from({ length: RATING_MAX }, (_, value) => {
-              const id = `star-${RATING_MAX - value}`;
+            {Array.from({ length: RATING_MAX }, (_, idx) => {
+              const value = RATING_MAX - idx;
+              const id = `star-${value}`;
               return (
                 <Fragment key={id}>
                   <input
