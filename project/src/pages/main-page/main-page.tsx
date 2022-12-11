@@ -1,11 +1,12 @@
-import FilmCard from '../../components/film-card/film-card';
-import { promoFilmType } from '../../types/films';
+import ListFilms from '../../components/list-films/list-films';
+import { FilmsType, FilmType } from '../../types/films';
 
 type MainPageProps = {
-  promo: promoFilmType;
+  promo: FilmType;
+  films: FilmsType;
 }
 
-function MainPage({ promo }: MainPageProps): JSX.Element {
+function MainPage({ promo, films }: MainPageProps): JSX.Element {
   return (
     <>
       <section className="film-card">
@@ -106,28 +107,7 @@ function MainPage({ promo }: MainPageProps): JSX.Element {
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-            <FilmCard name={'Fantastic Beasts: The Crimes of Grindelwald'} posterImage={'img/fantastic-beasts-the-crimes-of-grindelwald.jpg'} />
-            <FilmCard name={'Bohemian Rhapsody'} posterImage={'img/bohemian-rhapsody.jpg'} />
-            <FilmCard name={'Macbeth'} posterImage={'img/macbeth.jpg'} />
-            <FilmCard name={'Aviator'} posterImage={'img/aviator.jpg'} />
-            <FilmCard name={'We need to talk about Kevin'} posterImage={'img/we-need-to-talk-about-kevin.jpg'} />
-            <FilmCard name={'What We Do in the Shadows'} posterImage={'img/what-we-do-in-the-shadows.jpg'} />
-            <FilmCard name={'Revenant'} posterImage={'img/revenant.jpg'} />
-            <FilmCard name={'Johnny English'} posterImage={'img/johnny-english.jpg'} />
-            <FilmCard name={'Shutter Island'} posterImage={'img/shutter-island.jpg'} />
-            <FilmCard name={'Pulp Fiction'} posterImage={'img/pulp-fiction.jpg'} />
-            <FilmCard name={'No Country for Old Men'} posterImage={'img/no-country-for-old-men.jpg'} />
-            <FilmCard name={'Snatch'} posterImage={'img/snatch.jpg'} />
-            <FilmCard name={'Moonrise Kingdom'} posterImage={'img/moonrise-kingdom.jpg'} />
-            <FilmCard name={'Seven Years in Tibet'} posterImage={'img/seven-years-in-tibet.jpg'} />
-            <FilmCard name={'Midnight Special'} posterImage={'img/midnight-special.jpg'} />
-            <FilmCard name={'War of the Worlds'} posterImage={'img/war-of-the-worlds.jpg'} />
-            <FilmCard name={'Dardjeeling Limited'} posterImage={'img/dardjeeling-limited.jpg'} />
-            <FilmCard name={'Orlando'} posterImage={'img/orlando.jpg'} />
-            <FilmCard name={'Mindhunter'} posterImage={'img/mindhunter.jpg'} />
-            <FilmCard name={'Midnight Special'} posterImage={'img/midnight-special.jpg'} />
-          </div>
+          <ListFilms films={films} />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>

@@ -1,6 +1,11 @@
-import FilmCard from '../../components/film-card/film-card';
+import ListFilms from '../../components/list-films/list-films';
+import { FilmsType } from '../../types/films';
 
-function MyListPage(): JSX.Element {
+type MyListPageProps = {
+  myListFilms: FilmsType;
+}
+
+function MyListPage({ myListFilms }: MyListPageProps): JSX.Element {
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -12,7 +17,7 @@ function MyListPage(): JSX.Element {
           </a>
         </div>
 
-        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">9</span></h1>
+        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">{myListFilms.length}</span></h1>
         <ul className="user-block">
           <li className="user-block__item">
             <div className="user-block__avatar">
@@ -28,17 +33,7 @@ function MyListPage(): JSX.Element {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <div className="catalog__films-list">
-          <FilmCard name={'Fantastic Beasts: The Crimes of Grindelwald'} posterImage={'img/fantastic-beasts-the-crimes-of-grindelwald.jpg'} />
-          <FilmCard name={'Bohemian Rhapsody'} posterImage={'img/bohemian-rhapsody.jpg'} />
-          <FilmCard name={'Macbeth'} posterImage={'img/macbeth.jpg'} />
-          <FilmCard name={'Aviator'} posterImage={'img/aviator.jpg'} />
-          <FilmCard name={'We need to talk about Kevin'} posterImage={'img/we-need-to-talk-about-kevin.jpg'} />
-          <FilmCard name={'What We Do in the Shadows'} posterImage={'img/what-we-do-in-the-shadows.jpg'} />
-          <FilmCard name={'Revenant'} posterImage={'img/revenant.jpg'} />
-          <FilmCard name={'Johnny English'} posterImage={'img/johnny-english.jpg'} />
-          <FilmCard name={'Shutter Island'} posterImage={'img/shutter-island.jpg'} />
-        </div>
+        <ListFilms films={myListFilms} />
       </section>
 
       <footer className="page-footer">
