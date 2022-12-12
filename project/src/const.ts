@@ -47,3 +47,5 @@ export const FilmScores: {
     score: 'Awesome',
   },
 ];
+
+export const PLAYER_DELAY = 1000;
