@@ -39,7 +39,7 @@ function App({ promo, films, reviews }: AppProps): JSX.Element {
         />
         <Route
           path={`${AppRoute.Film}${AppRoute.Id}`}
-          element={<MoviePage />}
+          element={<MoviePage films={films} reviews={reviews} />}
         />
         <Route
           path={`${AppRoute.Film}${AppRoute.Id}${AppRoute.AddReview}`}
