@@ -1,5 +1,9 @@
+import Logo from '../../components/logo/logo';
+import UserBlock from '../../components/user-block/user-block';
 import ListFilms from '../../components/list-films/list-films';
+import Footer from '../../components/footer/footer';
 import { FilmsType, FilmType } from '../../types/films';
+import { mockUser } from '../../mocks/user';
 
 type MainPageProps = {
   promo: FilmType;
@@ -17,24 +21,8 @@ function MainPage({ promo, films }: MainPageProps): JSX.Element {
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header film-card__head">
-          <div className="logo">
-            <a className="logo__link" href="#todo">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a className="user-block__link" href="#todo">Sign out</a>
-            </li>
-          </ul>
+          <Logo />
+          <UserBlock user={mockUser} />
         </header>
 
         <div className="film-card__wrap">
@@ -114,19 +102,7 @@ function MainPage({ promo, films }: MainPageProps): JSX.Element {
           </div>
         </section>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a className="logo__link logo__link--light" href="#todo">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );

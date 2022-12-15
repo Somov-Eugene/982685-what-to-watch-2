@@ -1,10 +1,15 @@
-import { useParams } from 'react-router-dom';
-import FilmTabs from '../../components/film-tabs/film-tabs';
+import { Link, useParams } from 'react-router-dom';
+import Logo from '../../components/logo/logo';
+import UserBlock from '../../components/user-block/user-block';
 import NotFoundPage from '../not-found-page/not-found-page';
+import FilmTabs from '../../components/film-tabs/film-tabs';
+import ListFilms from '../../components/list-films/list-films';
+import Footer from '../../components/footer/footer';
 import { FilmsType } from '../../types/films';
 import { ReviewsType } from '../../types/reviews';
-import ListFilms from '../../components/list-films/list-films';
 import { mockSimilarFilms } from '../../mocks/films';
+import { mockUser } from '../../mocks/user';
+import { AppRoute } from '../../const';
 
 type MoviePageProps = {
   films: FilmsType;
@@ -33,24 +38,8 @@ function MoviePage({ films, reviews } :MoviePageProps): JSX.Element {
           <h1 className="visually-hidden">WTW</h1>
 
           <header className="page-header film-card__head">
-            <div className="logo">
-              <a className="logo__link" href="main.html">
-                <span className="logo__letter logo__letter--1">W</span>
-                <span className="logo__letter logo__letter--2">T</span>
-                <span className="logo__letter logo__letter--3">W</span>
-              </a>
-            </div>
-
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <a className="user-block__link" href="#todo">Sign out</a>
-              </li>
-            </ul>
+            <Logo />
+            <UserBlock user={mockUser} />
           </header>
 
           <div className="film-card__wrap">
@@ -75,7 +64,7 @@ function MoviePage({ films, reviews } :MoviePageProps): JSX.Element {
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </button>
-                <a href="add-review.html" className="btn film-card__button">Add review</a>
+                <Link className="btn film-card__button" to={`${AppRoute.AddReview}/${currentFilm.id}`}>Add review</Link>
               </div>
             </div>
           </div>
@@ -99,19 +88,7 @@ function MoviePage({ films, reviews } :MoviePageProps): JSX.Element {
           <ListFilms films={similarFilms} />
         </section>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a href="main.html" className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );
