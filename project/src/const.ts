@@ -23,22 +23,22 @@ export const FilmScores: {
 }[] = [
   {
     from: 0,
-    to: 2,
+    to: 3,
     score: 'Bad',
   },
   {
     from: 3,
-    to: 4,
+    to: 5,
     score: 'Normal',
   },
   {
     from: 5,
-    to: 7,
+    to: 8,
     score: 'Good',
   },
   {
     from: 8,
-    to: 9,
+    to: 10,
     score: 'Very good',
   },
   {
@@ -49,3 +49,10 @@ export const FilmScores: {
 ];
 
 export const PLAYER_DELAY = 1000;
+export const MINUTES_IN_HOUR = 60;
+
+export enum FilmTab {
+  Overview = 'Overview',
+  Details = 'Details',
+  Reviews = 'Reviews',
+}
