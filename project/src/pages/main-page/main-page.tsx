@@ -1,22 +1,35 @@
+import { useEffect } from 'react';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 import ListGenres from '../../components/list-genres/list-genres';
 import ListFilms from '../../components/list-films/list-films';
+import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import Footer from '../../components/footer/footer';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { filteredFilmsByGenre } from '../../utils/utils';
 import { FilmType } from '../../types/films';
 import { mockUser } from '../../mocks/user';
 import { Genres } from '../../const';
+import { resetQtyFilms } from '../../store/actions';
 
 type MainPageProps = {
   promo: FilmType;
 }
 
 function MainPage({ promo }: MainPageProps): JSX.Element {
+  const dispatch = useAppDispatch();
   const films = useAppSelector((state) => state.films);
   const selectedGenre = useAppSelector((state) => state.genre) as Genres;
-  const filteredfilms = filteredFilmsByGenre(films, selectedGenre);
+  const qtyShowFilms = useAppSelector((state) => state.QtyShowFilms);
+  const filteredFilms = filteredFilmsByGenre(films, selectedGenre);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+    return () => {
+      dispatch(resetQtyFilms);
+    };
+  }, [dispatch]);
 
   return (
     <>
@@ -69,11 +82,8 @@ function MainPage({ promo }: MainPageProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <ListGenres />
-          <ListFilms films={filteredfilms} />
-
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <ListFilms films={filteredFilms} />
+          { ((filteredFilms.length - qtyShowFilms) > 0) && <ShowMoreButton /> }
         </section>
 
         <Footer />
