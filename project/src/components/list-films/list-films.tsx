@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import FilmCard from '../film-card/film-card';
 import { FilmsType } from '../../types/films';
 import { AppRoute, PLAYER_DELAY } from '../../const';
+import { useAppSelector } from '../../hooks';
 
 type ListFilmsProps = {
   films: FilmsType;
@@ -17,7 +18,9 @@ function ListFilms({ films }: ListFilmsProps): JSX.Element {
   // State for Hover flag
   const [isHover, setHoverCard] = useState(false);
 
-  const listFilms = films.map((film) => {
+  const qtyShowFilms = useAppSelector<number>((state) => state.QtyShowFilms);
+
+  const listFilms = films.slice(0, qtyShowFilms).map((film) => {
     let timerId: NodeJS.Timeout;
 
     const handleMouseEnter = (): void => {
