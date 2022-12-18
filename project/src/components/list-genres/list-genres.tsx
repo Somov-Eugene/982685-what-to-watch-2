@@ -1,7 +1,7 @@
 import { MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
-import { changeGenre } from '../../store/actions';
+import { changeGenre, resetQtyFilms } from '../../store/actions';
 import { getListGenres } from '../../utils/utils';
 import { Genres } from '../../const';
 
@@ -15,6 +15,7 @@ function ListGenres(): JSX.Element {
   const handleGenreClick = (evt: MouseEvent<HTMLAnchorElement>): void => {
     const genre = evt.currentTarget.text as Genres;
     dispatch(changeGenre(genre));
+    dispatch(resetQtyFilms());
   };
 
   return (

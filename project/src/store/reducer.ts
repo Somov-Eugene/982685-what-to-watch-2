@@ -1,17 +1,19 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeGenre, loadFilms } from './actions';
+import { changeGenre, incementQtyFilms, loadFilms, resetQtyFilms } from './actions';
 import { FilmsType } from './../types/films';
-import { Genres } from '../const';
+import { Genres, QTY_DISPLAYED_FILMS_DEFAULT } from '../const';
 import { mockFilms } from '../mocks/films';
 
 type InitialState = {
   genre: string;
   films: FilmsType;
+  QtyShowFilms: number;
 };
 
 const initialState: InitialState = {
   genre: Genres.AllGenres,
   films: mockFilms,
+  QtyShowFilms: QTY_DISPLAYED_FILMS_DEFAULT,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -21,6 +23,12 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadFilms, (state, action) => {
       state.films = action.payload;
+    })
+    .addCase(incementQtyFilms, (state) => {
+      state.QtyShowFilms += QTY_DISPLAYED_FILMS_DEFAULT;
+    })
+    .addCase(resetQtyFilms, (state) => {
+      state.QtyShowFilms = QTY_DISPLAYED_FILMS_DEFAULT;
     });
 });
 
