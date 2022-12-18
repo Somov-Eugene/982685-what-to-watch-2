@@ -1,16 +1,23 @@
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
+import ListGenres from '../../components/list-genres/list-genres';
 import ListFilms from '../../components/list-films/list-films';
 import Footer from '../../components/footer/footer';
-import { FilmsType, FilmType } from '../../types/films';
+import { useAppSelector } from '../../hooks';
+import { filteredFilmsByGenre } from '../../utils/utils';
+import { FilmType } from '../../types/films';
 import { mockUser } from '../../mocks/user';
+import { Genres } from '../../const';
 
 type MainPageProps = {
   promo: FilmType;
-  films: FilmsType;
 }
 
-function MainPage({ promo, films }: MainPageProps): JSX.Element {
+function MainPage({ promo }: MainPageProps): JSX.Element {
+  const films = useAppSelector((state) => state.films);
+  const selectedGenre = useAppSelector((state) => state.genre) as Genres;
+  const filteredfilms = filteredFilmsByGenre(films, selectedGenre);
+
   return (
     <>
       <section className="film-card">
@@ -61,41 +68,8 @@ function MainPage({ promo, films }: MainPageProps): JSX.Element {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-          <ul className="catalog__genres-list">
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <a className="catalog__genres-link" href="#todo">All genres</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a className="catalog__genres-link" href="#todo">Comedies</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a className="catalog__genres-link" href="#todo">Crime</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a className="catalog__genres-link" href="#todo">Documentary</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a className="catalog__genres-link" href="#todo">Dramas</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a className="catalog__genres-link" href="#todo">Horror</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a className="catalog__genres-link" href="#todo">Kids & Family</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a className="catalog__genres-link" href="#todo">Romance</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a className="catalog__genres-link" href="#todo">Sci-Fi</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a className="catalog__genres-link" href="#todo">Thrillers</a>
-            </li>
-          </ul>
-
-          <ListFilms films={films} />
+          <ListGenres />
+          <ListFilms films={filteredfilms} />
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
