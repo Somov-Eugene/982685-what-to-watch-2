@@ -3,7 +3,6 @@ import UserBlock from '../../components/user-block/user-block';
 import ListFilms from '../../components/list-films/list-films';
 import Footer from '../../components/footer/footer';
 import { useAppSelector } from '../../hooks';
-import { mockUser } from '../../mocks/user';
 
 function MyListPage(): JSX.Element {
   const favoriteFilms = useAppSelector((state) => state.favoriteFilms);
@@ -16,7 +15,7 @@ function MyListPage(): JSX.Element {
         <h1 className="page-title user-page__title">
           My list <span className="user-page__film-count">{favoriteFilms.length}</span>
         </h1>
-        <UserBlock user={mockUser} />
+        <UserBlock />
       </header>
 
       <section className="catalog">

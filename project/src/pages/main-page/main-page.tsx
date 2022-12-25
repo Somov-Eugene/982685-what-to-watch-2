@@ -7,8 +7,7 @@ import ShowMoreButton from '../../components/show-more-button/show-more-button';
 import Footer from '../../components/footer/footer';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { filteredFilmsByGenre } from '../../utils/utils';
-import { mockUser } from '../../mocks/user';
-import { Genres } from '../../const';
+import { AuthorizationStatus, Genres } from '../../const';
 import { resetQtyFilms } from '../../store/actions';
 
 function MainPage(): JSX.Element {
@@ -33,17 +32,19 @@ function MainPage(): JSX.Element {
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          {(authorizationStatus && promo) ? <img src={promo.backgroundImage} alt={promo.name} /> : <img src="img/bg-header.jpg" alt="" />}
+          {promo
+            ? <img src={promo.backgroundImage} alt={promo.name} />
+            : <img src="img/bg-header.jpg" alt="" />}
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header film-card__head">
           <Logo />
-          <UserBlock user={mockUser} />
+          <UserBlock />
         </header>
 
-        {(authorizationStatus && promo) &&
+        {promo &&
           <div className="film-card__wrap">
             <div className="film-card__info">
               <div className="film-card__poster">
@@ -64,13 +65,14 @@ function MainPage(): JSX.Element {
                     </svg>
                     <span>Play</span>
                   </button>
-                  <button className="btn btn--list film-card__button" type="button">
-                    <svg viewBox="0 0 19 20" width="19" height="20">
-                      <use xlinkHref="#add" />
-                    </svg>
-                    <span>My list</span>
-                    <span className="film-card__count">{favoriteFilms.length}</span>
-                  </button>
+                  {(authorizationStatus === AuthorizationStatus.Auth) &&
+                    <button className="btn btn--list film-card__button" type="button">
+                      <svg viewBox="0 0 19 20" width="19" height="20">
+                        <use xlinkHref="#add" />
+                      </svg>
+                      <span>My list</span>
+                      <span className="film-card__count">{favoriteFilms.length}</span>
+                    </button>}
                 </div>
               </div>
             </div>

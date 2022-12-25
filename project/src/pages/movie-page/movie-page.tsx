@@ -6,12 +6,12 @@ import FilmTabs from '../../components/film-tabs/film-tabs';
 import ListFilms from '../../components/list-films/list-films';
 import Footer from '../../components/footer/footer';
 import { mockSimilarFilms } from '../../mocks/films';
-import { mockUser } from '../../mocks/user';
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppSelector } from '../../hooks';
 
 function MoviePage(): JSX.Element {
   const { id } = useParams();
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const films = useAppSelector((state) => state.films);
   const similarFilms = mockSimilarFilms;
   const favoriteFilms = useAppSelector((state) => state.favoriteFilms);
@@ -38,7 +38,7 @@ function MoviePage(): JSX.Element {
 
           <header className="page-header film-card__head">
             <Logo />
-            <UserBlock user={mockUser} />
+            <UserBlock />
           </header>
 
           <div className="film-card__wrap">
@@ -56,14 +56,17 @@ function MoviePage(): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">{favoriteFilmsCount}</span>
-                </button>
-                <Link className="btn film-card__button" to={`${AppRoute.AddReview}/${filmId}`}>Add review</Link>
+                {(authorizationStatus === AuthorizationStatus.Auth) ?
+                  <>
+                    <button className="btn btn--list film-card__button" type="button">
+                      <svg viewBox="0 0 19 20" width="19" height="20">
+                        <use xlinkHref="#add"></use>
+                      </svg>
+                      <span>My list</span>
+                      <span className="film-card__count">{favoriteFilmsCount}</span>
+                    </button>
+                    <Link className="btn film-card__button" to={`${AppRoute.AddReview}/${filmId}`}>Add review</Link>
+                  </> : ''}
               </div>
             </div>
           </div>

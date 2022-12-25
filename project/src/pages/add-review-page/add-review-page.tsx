@@ -5,7 +5,6 @@ import UserBlock from '../../components/user-block/user-block';
 import NotFoundPage from '../not-found-page/not-found-page';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
 import { useAppSelector } from '../../hooks';
-import { mockUser } from '../../mocks/user';
 
 function AddReviewPage(): JSX.Element {
   const { id } = useParams();
@@ -28,7 +27,7 @@ function AddReviewPage(): JSX.Element {
         <header className="page-header">
           <Logo />
           <Breadcrumbs film={currentFilm} />
-          <UserBlock user={mockUser} />
+          <UserBlock />
         </header>
 
         <div className="film-card__poster film-card__poster--small">
