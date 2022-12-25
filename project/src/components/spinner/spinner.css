@@ -1,0 +1,51 @@
+.spinner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #2b1b1b;
+  color: #dfcf77;
+  height: 100vh;
+}
+
+.lds-ring {
+  display: block;
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.lds-ring span {
+  display: block;
+  position: absolute;
+  box-sizing: border-box;
+  width: 100px;
+  height: 100px;
+  margin-top: 20px;
+  border: 6px solid #dfcf77;
+  border-color: #dfcf77 transparent transparent transparent;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  will-change: transform;
+}
+
+.lds-ring span:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.lds-ring span:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.lds-ring span:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
