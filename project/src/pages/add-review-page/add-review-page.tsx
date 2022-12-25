@@ -4,15 +4,12 @@ import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
 import UserBlock from '../../components/user-block/user-block';
 import NotFoundPage from '../not-found-page/not-found-page';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
-import { FilmsType } from '../../types/films';
+import { useAppSelector } from '../../hooks';
 import { mockUser } from '../../mocks/user';
 
-type AddReviewPageProps = {
-  films: FilmsType;
-}
-
-function AddReviewPage({ films }: AddReviewPageProps): JSX.Element {
+function AddReviewPage(): JSX.Element {
   const { id } = useParams();
+  const films = useAppSelector((state) => state.films);
   const currentFilm = films.find((film) => `${film.id}` === id);
 
   if (!currentFilm) {

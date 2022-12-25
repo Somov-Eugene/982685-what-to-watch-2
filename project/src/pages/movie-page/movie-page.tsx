@@ -5,19 +5,18 @@ import NotFoundPage from '../not-found-page/not-found-page';
 import FilmTabs from '../../components/film-tabs/film-tabs';
 import ListFilms from '../../components/list-films/list-films';
 import Footer from '../../components/footer/footer';
-import { FilmsType } from '../../types/films';
-import { ReviewsType } from '../../types/reviews';
 import { mockSimilarFilms } from '../../mocks/films';
 import { mockUser } from '../../mocks/user';
 import { AppRoute } from '../../const';
+import { useAppSelector } from '../../hooks';
 
-type MoviePageProps = {
-  films: FilmsType;
-  reviews: ReviewsType;
-}
-
-function MoviePage({ films, reviews } :MoviePageProps): JSX.Element {
+function MoviePage(): JSX.Element {
   const { id } = useParams();
+  const films = useAppSelector((state) => state.films);
+  const similarFilms = mockSimilarFilms;
+  const favoriteFilms = useAppSelector((state) => state.favoriteFilms);
+  const favoriteFilmsCount = favoriteFilms.length;
+  const reviews = useAppSelector((state) => state.reviews);
 
   const currentFilm = films.find((film) => `${film.id}` === id);
 
@@ -25,14 +24,14 @@ function MoviePage({ films, reviews } :MoviePageProps): JSX.Element {
     return <NotFoundPage />;
   }
 
-  const similarFilms = mockSimilarFilms;
+  const {id: filmId, backgroundColor, backgroundImage, posterImage, name, genre, released } = currentFilm;
 
   return (
     <>
-      <section className="film-card film-card--full">
+      <section className="film-card film-card--full" style={{backgroundColor}}>
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+            <img src={backgroundImage} alt={name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -44,10 +43,10 @@ function MoviePage({ films, reviews } :MoviePageProps): JSX.Element {
 
           <div className="film-card__wrap">
             <div className="film-card__desc">
-              <h2 className="film-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="film-card__title">{name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">Drama</span>
-                <span className="film-card__year">2014</span>
+                <span className="film-card__genre">{genre}</span>
+                <span className="film-card__year">{released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -62,9 +61,9 @@ function MoviePage({ films, reviews } :MoviePageProps): JSX.Element {
                     <use xlinkHref="#add"></use>
                   </svg>
                   <span>My list</span>
-                  <span className="film-card__count">9</span>
+                  <span className="film-card__count">{favoriteFilmsCount}</span>
                 </button>
-                <Link className="btn film-card__button" to={`${AppRoute.AddReview}/${currentFilm.id}`}>Add review</Link>
+                <Link className="btn film-card__button" to={`${AppRoute.AddReview}/${filmId}`}>Add review</Link>
               </div>
             </div>
           </div>
@@ -73,7 +72,7 @@ function MoviePage({ films, reviews } :MoviePageProps): JSX.Element {
         <div className="film-card__wrap film-card__translate-top">
           <div className="film-card__info">
             <div className="film-card__poster film-card__poster--big">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
             </div>
 
             <FilmTabs film={currentFilm} reviews={reviews} />

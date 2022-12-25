@@ -8,6 +8,14 @@ export enum AppRoute {
   Id = '/:id',
 }
 
+export enum APIRoute {
+  Promo ='/promo',
+  Films = '/films',
+  Favorites ='/favorite',
+  Login = '/login',
+  Logout = '/logout',
+}
+
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',

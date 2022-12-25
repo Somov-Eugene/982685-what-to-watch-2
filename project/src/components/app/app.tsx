@@ -7,23 +7,26 @@ import MoviePage from '../../pages/movie-page/movie-page';
 import AddReviewPage from '../../pages/add-review-page/add-review-page';
 import PlayerPage from '../../pages/player-page/player-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
-import { FilmsType, FilmType } from '../../types/films';
-import { ReviewsType } from '../../types/reviews';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import Spinner from '../spinner/spinner';
+import { useAppSelector } from '../../hooks';
+import { AppRoute } from '../../const';
 
-type AppProps = {
-  promo: FilmType;
-  films: FilmsType;
-  reviews: ReviewsType;
-}
+function App(): JSX.Element {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const isFilmsDataLoading = useAppSelector((state) => state.isFilmsDataLoading);
 
-function App({ promo, films, reviews }: AppProps): JSX.Element {
+  if (isFilmsDataLoading) {
+    return (
+      <Spinner />
+    );
+  }
+
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={<MainPage promo={promo} />}
+          element={<MainPage />}
         />
         <Route
           path={AppRoute.SignIn}
@@ -32,18 +35,18 @@ function App({ promo, films, reviews }: AppProps): JSX.Element {
         <Route
           path={AppRoute.MyList}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-              <MyListPage myListFilms={films} />
+            <PrivateRoute authorizationStatus={authorizationStatus}>
+              <MyListPage />
             </PrivateRoute>
           }
         />
         <Route
           path={`${AppRoute.Film}${AppRoute.Id}`}
-          element={<MoviePage films={films} reviews={reviews} />}
+          element={<MoviePage />}
         />
         <Route
           path={`${AppRoute.Film}${AppRoute.Id}${AppRoute.AddReview}`}
-          element={<AddReviewPage films={films} />}
+          element={<AddReviewPage />}
         />
         <Route
           path={`${AppRoute.Player}${AppRoute.Id}`}
